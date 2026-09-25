@@ -1,0 +1,37 @@
+/* products.css */
+
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.text-transparent {
+  color: transparent !important;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #2979ff, #00d4ff);
+}
+
+.tracking-widest {
+  letter-spacing: 0.15em;
+}
+
+.product-bento-card {
+  transition: all 0.4s ease;
+}
+
+.product-bento-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important;
+}
+
+.backdrop-blur {
+  backdrop-filter: blur(10px);
+}
+
+@media (min-width: 992px) {
+  .w-lg-50 {
+    width: 50% !important;
+  }
+}

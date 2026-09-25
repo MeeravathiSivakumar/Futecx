@@ -1,0 +1,86 @@
+.community-hero {
+  background: linear-gradient(180deg, #0a0f18 0%, #151d29 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.community-glow-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(13, 110, 253, 0.1) 0%, rgba(0, 0, 0, 0) 50%);
+}
+
+.social-card {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transform: translateY(0);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.social-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.social-card i {
+  transition: transform 0.4s ease;
+}
+
+.social-card:hover i {
+  transform: scale(1.1);
+}
+
+/* Individual Platform Glow Effects */
+.card-whatsapp:hover {
+  border-color: rgba(37, 211, 102, 0.5);
+  box-shadow: 0 15px 35px rgba(37, 211, 102, 0.2);
+}
+.card-whatsapp i { color: #25D366; }
+
+.card-discord:hover {
+  border-color: rgba(88, 101, 242, 0.5);
+  box-shadow: 0 15px 35px rgba(88, 101, 242, 0.2);
+}
+.card-discord i { color: #5865F2; }
+
+.card-instagram:hover {
+  border-color: rgba(225, 48, 108, 0.5);
+  box-shadow: 0 15px 35px rgba(225, 48, 108, 0.2);
+}
+/* Instagram gradient text */
+.card-instagram i { 
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-youtube:hover {
+  border-color: rgba(255, 0, 0, 0.5);
+  box-shadow: 0 15px 35px rgba(255, 0, 0, 0.2);
+}
+.card-youtube i { color: #FF0000; }
+
+.card-x:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
+}
+.card-x i { color: #ffffff; }
+
+.card-facebook:hover {
+  border-color: rgba(24, 119, 242, 0.5);
+  box-shadow: 0 15px 35px rgba(24, 119, 242, 0.2);
+}
+.card-facebook i { color: #1877F2; }
+
+.card-linkedin:hover {
+  border-color: rgba(10, 102, 194, 0.5);
+  box-shadow: 0 15px 35px rgba(10, 102, 194, 0.2);
+}
+.card-linkedin i { color: #0a66c2; }

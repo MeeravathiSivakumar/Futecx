@@ -1,0 +1,178 @@
+:root {
+      --brand: #2979ff;      
+      --ink: #0f172a;        
+      --muted: #64748b;      
+      --surface: #0b1220;    
+      --glass: rgba(255, 255, 255, 0.75);
+      --radius: 1.25rem;     
+      --shadow: 0 10px 30px rgba(2, 6, 23, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; color: var(--ink); }
+    a { text-decoration: none; }
+
+    /* Navbar */
+    .navbar { backdrop-filter: saturate(140%) blur(8px); }
+    .nav-glass {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      padding: .35rem .75rem;
+    }
+    .btn-blur {
+      background: var(--glass);
+      border: none;
+      color: var(--brand);
+      border-radius: 999px;
+      padding: .6rem 1rem;
+      transition: all .25s ease;
+    }
+    .btn-blur:hover { background: #fff; box-shadow: var(--shadow); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 70vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #fff;
+      overflow: clip;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: url("/image/about/bg.jpeg") center/cover no-repeat;
+      filter: brightness(70%);
+      z-index: -2;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(11,18,32,.65), rgba(11,18,32,.35) 45%, rgba(11,18,32,.75));
+      z-index: -1;
+    }
+    .hero .badge {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px;
+      color: #fff;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Section base */
+    section { padding: 72px 0; }
+    .section-title { color: var(--brand); font-weight: 800; letter-spacing: .3px; }
+    .section-sub { color: var(--muted); }
+
+    /* About Overview */
+    .about-card {
+      background: #fff; border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 32px; height: 100%;
+    }
+    .about-img { border-radius: var(--radius); box-shadow: var(--shadow); }
+
+    /* Feature Chips */
+    .chip { border: 1px dashed rgba(41,121,255,.5); color: var(--brand); border-radius: 999px; padding: .5rem .9rem; font-weight: 600; }
+
+    /* Metric cards */
+    .kpi {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+      border: 1px solid #eef4ff; border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 24px; height: 100%; text-align: center;
+    }
+    .kpi h3 { font-weight: 800; font-size: 2rem; margin: 0; color: var(--brand); }
+    .kpi p { margin: 0; color: var(--muted); }
+
+    /* Timeline */
+    .timeline { position: relative; }
+    .timeline::before { content: ""; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #e2e8f0; }
+    .tl-item { position: relative; padding-left: 64px; padding-bottom: 28px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot { position: absolute; left: 12px; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 3px solid var(--brand); }
+
+    /* Values */
+    .value-card { border-radius: var(--radius); border: 1px solid #eef2f7; padding: 24px; height: 100%; background: #fff; box-shadow: var(--shadow); }
+
+    /* Leadership */
+    .leader { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; height: 100%; }
+    .leader img { width: 100%; height: 220px; object-fit: cover; }
+
+    /* CTA */
+    .cta { background: linear-gradient(135deg, #1e293b, #0b1220); color: #fff; border-radius: calc(var(--radius) + 8px); box-shadow: var(--shadow); overflow: hidden; }
+    .cta .btn-light { border-radius: 999px; }
+
+    /* Footer tweaks */
+    .footer h4, .footer p { color: #fff; }
+
+    /* Back to top */
+    .back-to-top { position: fixed; bottom: 20px; right: 20px; z-index: 999; }
+
+    @media (max-width: 991px){
+      .hero { min-height: 56vh; }
+    }
+
+/* === TN-FUTECX Popup Design === */
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.popup-box {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  text-align: center;
+  padding: 30px 40px;
+  width: 350px;
+  animation: popupSlide 0.4s ease-in-out;
+}
+
+.popup-box h2 {
+  color: #1a237e;
+  margin-bottom: 10px;
+}
+
+.popup-box p {
+  color: #333;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.popup-actions .btn {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popupSlide {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
