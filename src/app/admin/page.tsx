@@ -2,20 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
 import { collection, getDocs, query, orderBy, doc, updateDoc, Timestamp } from "firebase/firestore";
-import { initializeApp, getApps } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, User } from "firebase/auth";
-
-// Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyDMj45IV8LXuOArD2DgtwvfB841dzcn620",
-  authDomain: "tn-futecx.firebaseapp.com",
-  projectId: "tn-futecx",
-  storageBucket: "tn-futecx.firebasestorage.app",
-  messagingSenderId: "884450104101",
-  appId: "1:884450104101:web:eae68a54cdee6078f300cc",
-};
-const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
-const auth = getAuth(app);
+import { signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 
 // Only these Google accounts are allowed into admin
 const ALLOWED_EMAILS = [

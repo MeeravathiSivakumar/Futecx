@@ -1,21 +1,8 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDMj45IV8LXuOArD2DgtwvfB841dzcn620",
-  authDomain: "tn-futecx.firebaseapp.com",
-  projectId: "tn-futecx",
-  storageBucket: "tn-futecx.firebasestorage.app",
-  messagingSenderId: "884450104101",
-  appId: "1:884450104101:web:eae68a54cdee6078f300cc",
-  measurementId: "G-TNYE4ZSD3C"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+import { signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 
 export interface UserData {
   displayName: string;
