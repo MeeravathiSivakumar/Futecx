@@ -240,7 +240,6 @@ export default function AdminPage() {
             <option value="reviewed">Reviewed</option>
             <option value="accepted">Accepted</option>
             <option value="rejected">Rejected</option>
-            <option value="spam">Spam</option>
           </select>
         </div>
 
@@ -275,12 +274,12 @@ export default function AdminPage() {
                               value={e.status}
                               onClick={ev => ev.stopPropagation()}
                               onChange={ev => updateStatus((e as any)._collection || activeTab, e.id, ev.target.value)}>
+                              {e.status === "spam" && <option value="spam" disabled>Auto Spam</option>}
                               <option value="new">New</option>
                               <option value="pending">Pending</option>
                               <option value="reviewed">Reviewed</option>
                               <option value="accepted">Accepted</option>
                               <option value="rejected">Rejected</option>
-                              <option value="spam">Spam</option>
                             </select>
                           </td>
                         </tr>
