@@ -27,28 +27,21 @@ export default function Contact() {
     setLoading(true);
 
     try {
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
-      // If keys are provided, use real EmailJS. Otherwise, simulate success for MVP demo.
-      if (serviceId && serviceId !== "YOUR_SERVICE_ID") {
-        await emailjs.send(
-          serviceId,
-          templateId || "",
-          { name, email, phone, service, message },
-          publicKey
-        );
-      } else {
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        console.log("Mock Email Sent:", { name, email, phone, service, message });
-      }
+      await addDoc(collection(db, "contact_inquiries"), {
+        formType: "Contact Inquiry",
+        name,
+        email,
+        phone,
+        service,
+        message,
+        submittedAt: serverTimestamp(),
+        status: "new",
+      });
       
       alert("🎉 Message sent successfully! Our team will get back to you shortly.");
       formRef.current.reset();
     } catch (error) {
-      console.error(error);
+      console.error("Firebase Error:", error);
       alert("Failed to send message. Try again.");
     } finally {
       setLoading(false);
