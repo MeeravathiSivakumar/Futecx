@@ -30,7 +30,26 @@ export async function verifyEmailBackend(email: string): Promise<VerificationRes
   }
 
   if (/^\d+$/.test(prefix)) {
-    return { status: 'risky', reason: 'Email prefix consists only of numbers' };
+    return { status: 'invalid', reason: 'Email prefix consists only of numbers (fake pattern)' };
+  }
+
+  // HEURISTICS: Explicit Dummy Checks
+  const dummyWords = ["test", "dummy", "fake", "spam", "asdf", "qwerty", "zxcv", "abcd", "qwer"];
+  if (dummyWords.some(word => emailLower.includes(word))) {
+    return { status: 'invalid', reason: 'Email contains known dummy/test words' };
+  }
+
+  if (/(.)\1{4,}/.test(prefix)) {
+    return { status: 'invalid', reason: 'Email contains unnatural repeating characters' };
+  }
+
+  if (/[bcdfghjklmnpqrstvwxz]{5,}/i.test(prefix)) {
+    return { status: 'invalid', reason: 'Email prefix appears to be a random keyboard smash (no vowels)' };
+  }
+
+  const typoDomains = ["gamil.com", "gmal.com", "gmail.co", "gmail.con", "yaho.com", "yahooo.com", "outlok.com"];
+  if (typoDomains.includes(domain)) {
+    return { status: 'invalid', reason: 'Domain appears to be a typo of a major provider' };
   }
 
   // 2. Check Disposable Domains via Free Open API (Kickbox)
@@ -46,7 +65,6 @@ export async function verifyEmailBackend(email: string): Promise<VerificationRes
       }
     }
   } catch (error) {
-    // If the API fails, we just continue to MX checking
     console.warn("Disposable check API failed:", error);
   }
 
@@ -60,27 +78,8 @@ export async function verifyEmailBackend(email: string): Promise<VerificationRes
     if (error.code === 'ENOTFOUND' || error.code === 'ENODATA') {
       return { status: 'undeliverable', reason: 'Domain does not exist or has no mail servers configured' };
     }
-    // If DNS timeout or other error, we don't block the user, we mark as unknown
     return { status: 'unknown', reason: `DNS lookup failed: ${error.code || 'Timeout'}` };
   }
 
-  // 4. Paid Provider Check (Fallback placeholder)
-  // If user configures an API key in the future, we can call it here.
-  const apiKey = process.env.EMAIL_VERIFICATION_API_KEY;
-  if (apiKey) {
-    try {
-      const apiRes = await fetch(`https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${emailLower}`);
-      if (apiRes.ok) {
-        const data = await apiRes.json();
-        if (data.deliverability === 'UNDELIVERABLE') {
-          return { status: 'undeliverable', reason: 'Verification API flagged as undeliverable' };
-        }
-      }
-    } catch (error) {
-      console.warn("External verification API failed", error);
-    }
-  }
-
-  // If everything passes, we assume it's deliverable (or at least valid domain/syntax)
-  return { status: 'deliverable', reason: 'Passed syntax, MX, and disposable checks' };
+  return { status: 'deliverable', reason: 'Passed syntax, heuristics, MX, and disposable checks' };
 }
