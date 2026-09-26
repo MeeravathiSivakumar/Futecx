@@ -70,34 +70,47 @@ export default function Home() {
     <>
       <HeroSlider />
 
-      {/* ANNIVERSARY HIGHLIGHT - Cosmic Star Visuals */}
-      <section className="py-5 bg-white position-relative" style={{ zIndex: 10 }}>
-        <div className="container">
-          <div className="rounded-5 py-4 px-4 px-md-5 shadow-lg position-relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0f172a 0%, #083344 50%, #0f766e 100%)", border: "1px solid rgba(6, 182, 212, 0.3)" }} data-aos="zoom-in-up" data-aos-duration="1500" data-aos-delay="200">
-            <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "url('https://www.transparenttextures.com/patterns/stardust.png')", opacity: 0.9 }}></div>
-            <div className="position-absolute top-50 start-50 translate-middle w-100 h-100" style={{ background: "radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, rgba(0,0,0,0) 70%)", animation: "pulse 4s infinite alternate" }}></div>
-            <div className="position-relative z-index-2">
-              <div className="d-flex flex-column flex-md-row align-items-center justify-content-between text-white">
-                <div className="d-flex align-items-center gap-4 mb-3 mb-md-0">
-                  <div className="display-1 fw-bold anniversary-text" style={{ letterSpacing: "-2px" }}>
-                     3<span className="fs-1 align-top fw-bold" style={{ marginLeft: "2px" }}>rd</span>
-                  </div>
-                  <div>
-                    <h4 className="fw-bolder mb-1 fs-2 text-uppercase" style={{ color: "#f8fafc", letterSpacing: "3px", textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>FUTECX Anniversary</h4>
-                    <p className="mb-2 fs-5 text-light opacity-85 fw-medium">Celebrating three years of relentless innovation and global growth.</p>
-                    <span className="badge rounded-pill text-white" style={{ background: "rgba(255, 255, 255, 0.15)", backdropFilter: "blur(5px)", border: "1px solid rgba(255, 255, 255, 0.3)", padding: "8px 16px", fontSize: "0.95rem", fontWeight: "600" }}>
-                      <i className="fas fa-calendar-alt me-2"></i> 27th Sep 2026 to 2027
-                    </span>
-                  </div>
-                </div>
-                <div data-aos="fade-left" data-aos-delay="600">
-                  <Link href="/about" className="btn btn-lg rounded-pill px-5 fw-bold text-dark shadow hover-lift" style={{ background: "linear-gradient(90deg, #06b6d4 0%, #14b8a6 100%)", border: "none" }}>Discover Our Journey</Link>
-                </div>
+      {/* ANNIVERSARY HIGHLIGHT */}
+      <section className="py-5 bg-white position-relative" style={{ zIndex: 10, borderBottom: "1px solid #f1f5f9" }}>
+        <div className="container py-3">
+          <div className="row align-items-center g-4 g-lg-5">
+
+            {/* LEFT: Year number */}
+            <div className="col-lg-2 col-md-3 text-center" data-aos="fade-right" data-aos-duration="800">
+              <div className="d-inline-flex flex-column align-items-center justify-content-center rounded-4" style={{ width: "100px", height: "100px", background: "linear-gradient(135deg, #0b1220 0%, #1e3a5f 100%)", boxShadow: "0 8px 30px rgba(0,0,0,0.15)" }}>
+                <div style={{ fontSize: "2.8rem", fontWeight: "900", color: "#38bdf8", lineHeight: 1 }}>3</div>
+                <div style={{ fontSize: "0.65rem", fontWeight: "700", color: "rgba(255,255,255,0.6)", letterSpacing: "3px", textTransform: "uppercase" }}>Years</div>
               </div>
             </div>
+
+            {/* CENTER: Text */}
+            <div className="col-lg-7 col-md-6" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+              <div className="d-flex align-items-center gap-2 mb-1">
+                <div style={{ width: "32px", height: "3px", background: "linear-gradient(90deg, #38bdf8, #6366f1)", borderRadius: "2px" }}></div>
+                <span style={{ fontSize: "0.75rem", fontWeight: "700", letterSpacing: "3px", textTransform: "uppercase", color: "#6366f1" }}>Milestone</span>
+              </div>
+              <h3 className="fw-black text-dark mb-1" style={{ fontSize: "clamp(1.5rem, 3vw, 2.2rem)", letterSpacing: "-0.5px" }}>
+                FUTECX <span style={{ color: "#0ea5e9" }}>Anniversary</span>
+              </h3>
+              <p className="text-muted mb-0" style={{ fontSize: "1rem", maxWidth: "500px", lineHeight: 1.6 }}>
+                Celebrating three years of relentless innovation and global growth.
+              </p>
+            </div>
+
+            {/* RIGHT: Date + CTA */}
+            <div className="col-lg-3 col-md-3 text-center text-md-end" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+              <div className="mb-2" style={{ fontSize: "0.75rem", fontWeight: "700", color: "#94a3b8", letterSpacing: "2px", textTransform: "uppercase" }}>
+                <i className="fas fa-calendar-alt me-1"></i> 27th Sep 2026
+              </div>
+              <Link href="/about" className="btn fw-bold rounded-pill px-4 py-2" style={{ background: "linear-gradient(90deg, #0ea5e9, #6366f1)", color: "#fff", border: "none", fontSize: "0.9rem" }}>
+                Our Journey →
+              </Link>
+            </div>
+
           </div>
         </div>
       </section>
+
 
       {/* UPCOMING */}
       <section id="upcoming" className="py-5" data-aos="fade-up" data-aos-duration="1000">
@@ -169,8 +182,7 @@ export default function Home() {
       </section>
 
       {/* IMPACT STATS */}
-      <section id="stats" className="py-5 position-relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0b1220 0%, #1e293b 100%)" }} data-aos="fade-up" data-aos-duration="1000">
-        <div className="position-absolute top-50 start-50 translate-middle w-100 h-100" style={{ background: "url('https://www.transparenttextures.com/patterns/connected.png')", opacity: 0.1 }}></div>
+      <section id="stats" className="py-5 position-relative overflow-hidden" style={{ background: "#0b1220" }} data-aos="fade-up" data-aos-duration="1000">
         <div className="container py-5 position-relative z-index-2">
           <div className="row mb-5">
             <div className="col text-center">
@@ -185,18 +197,45 @@ export default function Home() {
               { count: 24, label: "Projects Delivered", icon: "fa-solid fa-rocket" },
               { count: 15, label: "Workshops Hosted", icon: "fa-solid fa-chalkboard-user" },
               { count: 8, label: "Industry Partners", icon: "fa-solid fa-handshake" },
-            ].map((stat, i) => (
+            ].map((stat, i) => {
+              const gradients = [
+                'linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(14, 165, 233, 0.02) 100%)',
+                'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.02) 100%)',
+                'linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.02) 100%)',
+                'linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.02) 100%)'
+              ];
+              const borders = ['#0ea5e9', '#10b981', '#8b5cf6', '#f59e0b'];
+              const bgGradient = gradients[i % gradients.length];
+              const borderColor = borders[i % borders.length];
+
+              return (
               <div key={i} className="col-6 col-md-3">
-                <div className="kpi-card p-4 rounded-4 h-100 d-flex flex-column justify-content-center transition-all hover-lift" style={{ background: "rgba(255, 255, 255, 0.05)", backdropFilter: "blur(12px)", border: "1px solid rgba(255, 255, 255, 0.1)", boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}>
-                  <div className="mb-3 text-info display-5"><i className={stat.icon}></i></div>
-                  <h2 className="display-4 fw-black text-white mb-0 d-flex justify-content-center align-items-center">
-                    <span ref={(el) => { countersRef.current[i] = el; }} data-count={stat.count}>0</span>
-                    <span className="text-primary ms-1">+</span>
+                <div className="kpi-card p-4 p-xl-5 rounded-4 h-100 d-flex flex-column align-items-center justify-content-center transition-all position-relative overflow-hidden" 
+                     style={{ 
+                       background: bgGradient, 
+                       backdropFilter: "blur(20px)", 
+                       border: "1px solid rgba(255,255,255,0.05)",
+                       borderTop: `3px solid ${borderColor}`, 
+                       boxShadow: "0 15px 35px rgba(0,0,0,0.3)" 
+                     }}>
+                  
+                  {/* Glowing Icon Container */}
+                  <div className="mb-4 rounded-circle d-flex align-items-center justify-content-center position-relative" style={{ width: "70px", height: "70px", background: `rgba(255,255,255,0.05)`, border: `1px solid ${borderColor}` }}>
+                     <i className={`${stat.icon} fs-3 position-relative z-index-2`} style={{ color: borderColor }}></i>
+                     <div className="position-absolute w-100 h-100 rounded-circle opacity-25" style={{ filter: "blur(15px)", background: borderColor }}></div>
+                  </div>
+                  
+                  {/* Gradient Number */}
+                  <h2 className="display-4 fw-black mb-0 d-flex justify-content-center align-items-center">
+                    <span ref={(el) => { countersRef.current[i] = el; }} data-count={stat.count} style={{ background: "linear-gradient(90deg, #ffffff 0%, #e2e8f0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>0</span>
+                    <span className="ms-1" style={{ color: borderColor, textShadow: `0 0 20px ${borderColor}` }}>+</span>
                   </h2>
-                  <p className="mb-0 text-light opacity-75 mt-3 fw-semibold text-uppercase" style={{ letterSpacing: "2px", fontSize: "0.85rem" }}>{stat.label}</p>
+                  
+                  {/* Label */}
+                  <p className="mb-0 text-light opacity-75 mt-3 fw-bold text-uppercase" style={{ letterSpacing: "1.5px", fontSize: "0.8rem" }}>{stat.label}</p>
                 </div>
               </div>
-            ))}
+            )})}
           </div>
         </div>
       </section>

@@ -21,16 +21,16 @@ export default function AchievementsPage() {
     },
     {
       date: "2024",
-      title: "Recognized Mastery in Generative AI Engineering",
-      desc: "Attained master-level recognition in Generative AI and advanced prompt engineering, validating our deep architectural expertise in building autonomous AI systems and multimodal LLM workflows.",
+      title: "Google Cloud Gen AI Academy Certification",
+      desc: "Successfully completed the Google Cloud Gen AI Academy APAC Cohort, mastering the architecture, deployment, and orchestration of advanced intelligent AI agents on Google Cloud Run.",
       img: "/image/achievements/gen-ai-cert.jpg",
       badge: "AI Excellence",
       icon: "fa-solid fa-brain"
     },
     {
       date: "2024",
-      title: "Microsoft & AWS Engagements",
-      desc: "Participated in high-level interviews and tech engagements with industry giants like Microsoft and AWS, validating our technological approach and expanding our network.",
+      title: "Microsoft Engagements",
+      desc: "Participated in high-level tech engagements and interviews with Microsoft, validating our advanced technological approach and significantly expanding our enterprise network.",
       img: "/image/achievements/microsoft-hub.jpg",
       badge: "Industry Connect",
       icon: "fa-solid fa-handshake"
@@ -96,6 +96,7 @@ export default function AchievementsPage() {
     </>
   );
 }
+
 
 
 

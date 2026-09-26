@@ -172,10 +172,10 @@ export default function AboutPage() {
                     </div>
                   </div>
                   <div className="p-4 p-sm-5 bg-white d-flex flex-column justify-content-center w-100">
-                    <h4 className="fw-bolder mb-1 text-dark">Ashwin Ramakrishnan</h4>
-                    <p className="text-info fw-bold mb-3 small text-uppercase" style={{ letterSpacing: "1px" }}>Project Lead &bull; Full-Stack</p>
+                    <h4 className="fw-bolder mb-1 text-dark" style={{ fontSize: "1.35rem", whiteSpace: "nowrap" }}>Ashwin Ramakrishnan</h4>
+                    <p className="text-info fw-bold mb-3 small text-uppercase" style={{ letterSpacing: "1px" }}>Founder &bull; Technical Architect</p>
                     <p className="text-muted small mb-4 lh-lg">
-                      Guiding the technical architecture, AI integrations, and product development across FUTECX's core software portfolio.
+                      The driving force behind FUTECX. He architects complex AI systems, leads full-stack engineering, and pioneers the technical vision for all futuristic enterprise products.
                     </p>
                     <div className="d-flex gap-3 mt-auto">
                       <a href="https://github.com/AshwinRamakrishnan" className="btn btn-light rounded-circle shadow-sm d-flex align-items-center justify-content-center social-btn text-dark" style={{ width: "40px", height: "40px" }}><i className="fa-brands fa-github fs-5"></i></a>
@@ -194,15 +194,15 @@ export default function AboutPage() {
                     <div className="position-relative">
                       <img src="/image/team/meeravathi.png" alt="Meeravathi Sivakumar" className="rounded-circle shadow-lg" style={{ width: "130px", height: "130px", objectFit: "cover", objectPosition: "top", border: "5px solid #fff" }} onError={(e) => e.currentTarget.src = "https://ui-avatars.com/api/?name=Meeravathi+Sivakumar&background=E53935&color=fff"} />
                       <span className="position-absolute bottom-0 end-0 bg-danger text-white rounded-circle d-flex align-items-center justify-content-center shadow" style={{ width: "38px", height: "38px", border: "3px solid #fff" }}>
-                        <i className="fa-solid fa-paintbrush small"></i>
+                        <i className="fa-solid fa-bullseye small"></i>
                       </span>
                     </div>
                   </div>
                   <div className="p-4 p-sm-5 bg-white d-flex flex-column justify-content-center w-100">
-                    <h4 className="fw-bolder mb-1 text-dark">Meeravathi Sivakumar</h4>
-                    <p className="text-danger fw-bold mb-3 small text-uppercase" style={{ letterSpacing: "1px" }}>Front-End Developer &bull; UI/UX</p>
+                    <h4 className="fw-bolder mb-1 text-dark" style={{ fontSize: "1.35rem", whiteSpace: "nowrap" }}>Meeravathi Sivakumar</h4>
+                    <p className="text-danger fw-bold mb-3 small text-uppercase" style={{ letterSpacing: "1px" }}>Product Manager</p>
                     <p className="text-muted small mb-4 lh-lg">
-                      A talented frontend developer specializing in UI/UX. Her exceptional design skills and attention to detail make her an invaluable leader in the FUTECX team.
+                      An exceptional product strategist bridging the gap between complex engineering and user experience. She drives product vision, manages agile workflows, and ensures FUTECX consistently delivers cutting-edge, market-ready software solutions.
                     </p>
                     <div className="d-flex gap-3 mt-auto">
                       <a href="https://g.dev/MeeravathiSivakumar" className="btn btn-light rounded-circle shadow-sm d-flex align-items-center justify-content-center social-btn danger-hover text-danger" style={{ width: "40px", height: "40px" }}><i className="fa-brands fa-google fs-5"></i></a>
@@ -282,6 +282,8 @@ export default function AboutPage() {
     </>
   );
 }
+
+
 
 
 

@@ -2,7 +2,8 @@
 
 import React, { useRef, useState } from "react";
 import "./contact.css";
-import emailjs from "@emailjs/browser";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
