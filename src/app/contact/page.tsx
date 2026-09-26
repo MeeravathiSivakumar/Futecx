@@ -2,9 +2,6 @@
 
 import React, { useRef, useState } from "react";
 import "./contact.css";
-import { isSpam } from "@/lib/spamDetector";
-import { db } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -28,22 +25,21 @@ export default function Contact() {
     setLoading(true);
 
     try {
-      await addDoc(collection(db, "contact_inquiries"), {
-        formType: "Contact Inquiry",
-        name,
-        email,
-        phone,
-        service,
-        message,
-        submittedAt: serverTimestamp(),
-        status: isSpam({ name, email, phone, message }) ? "spam" : "new",
+      const res = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formType: 'contact', name, email, phone, service, message })
       });
       
-      alert("🎉 Message sent successfully! Our team will get back to you shortly.");
-      formRef.current.reset();
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error);
+
+      alert("🎉 Application submitted successfully! We will get back to you soon.");
+      if (formRef && formRef.current) formRef.current.reset();
+      else if (e.target) (e.target as HTMLFormElement).reset();
     } catch (error) {
-      console.error("Firebase Error:", error);
-      alert("Failed to send message. Try again.");
+      console.error("Submission Error:", error);
+      alert("Failed to submit. Please try again.");
     } finally {
       setLoading(false);
     }

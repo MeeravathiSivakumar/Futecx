@@ -1,8 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { isSpam } from "@/lib/spamDetector";
-import { db } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function CoreTeamForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");

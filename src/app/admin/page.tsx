@@ -97,10 +97,19 @@ export default function AdminPage() {
   useEffect(() => { if (user) fetchAll(); }, [user]);
 
   const updateStatus = async (colKey: string, docId: string, newStatus: string) => {
-    await updateDoc(doc(db, colKey, docId), { status: newStatus });
+    const isRestoring = newStatus !== "spam" && activeTab === "spam";
+    const updates: any = { status: newStatus };
+    if (isRestoring) updates.routingStatus = "application";
+    
+    await updateDoc(doc(db, colKey, docId), updates);
     setData(prev => ({
       ...prev,
-      [colKey]: prev[colKey].map(e => e.id === docId ? { ...e, status: newStatus } : e)
+      [colKey]: prev[colKey].map(e => {
+        if (e.id === docId) {
+          return { ...e, status: newStatus, ...(isRestoring ? { routingStatus: "application" } : {}) };
+        }
+        return e;
+      })
     }));
     if (selected?.id === docId) setSelected(prev => prev ? { ...prev, status: newStatus } : null);
   };
@@ -108,8 +117,8 @@ export default function AdminPage() {
   const activeCol = COLLECTIONS.find(c => c.key === activeTab) || { key: "spam", label: "Spam Vault", color: "#dc3545", icon: "fa-ban" };
   
   let baseEntries = activeTab === "spam" 
-    ? Object.values(data).flat().filter(e => e.status === "spam")
-    : (data[activeTab] || []).filter(e => e.status !== "spam");
+    ? Object.values(data).flat().filter(e => e.routingStatus === "spam")
+    : (data[activeTab] || []).filter(e => e.routingStatus !== "spam");
 
   const entries = baseEntries.filter(e => {
     const matchSearch = !search || e.name?.toLowerCase().includes(search.toLowerCase()) || e.email?.toLowerCase().includes(search.toLowerCase());
@@ -207,7 +216,7 @@ export default function AdminPage() {
         {/* Tabs */}
         <div className="d-flex gap-2 mb-3 flex-wrap">
           {COLLECTIONS.map(col => {
-            const count = (data[col.key] || []).filter(e => e.status !== "spam").length;
+            const count = (data[col.key] || []).filter(e => e.routingStatus !== "spam").length;
             return (
               <button key={col.key} onClick={() => { setActiveTab(col.key); setSelected(null); setSearch(""); setStatusFilter("all"); }}
                 className={`btn btn-sm rounded-pill fw-semibold ${activeTab === col.key ? "text-white" : "btn-light"}`}
@@ -223,7 +232,7 @@ export default function AdminPage() {
             style={activeTab === "spam" ? { background: "#dc3545", border: "none" } : {}}>
             <i className="fas fa-ban me-1"></i> Spam Vault
             <span className={`ms-2 badge rounded-pill ${activeTab === "spam" ? "bg-white text-danger" : "bg-danger text-white"}`}>
-              {Object.values(data).flat().filter(e => e.status === "spam").length}
+              {Object.values(data).flat().filter(e => e.routingStatus === "spam").length}
             </span>
           </button>
         </div>
@@ -274,7 +283,7 @@ export default function AdminPage() {
                               value={e.status}
                               onClick={ev => ev.stopPropagation()}
                               onChange={ev => updateStatus((e as any)._collection || activeTab, e.id, ev.target.value)}>
-                              {e.status === "spam" && <option value="spam" disabled>Auto Spam</option>}
+                              {e.routingStatus === "spam" && <option value="spam" disabled>Auto Spam</option>}
                               <option value="new">New</option>
                               <option value="pending">Pending</option>
                               <option value="reviewed">Reviewed</option>
@@ -305,6 +314,12 @@ export default function AdminPage() {
                   <span className={statusBadge(selected.status)}>{selected.status}</span>
                   <small className="text-muted ms-2">{formatDate(selected.submittedAt)}</small>
                 </div>
+                {selected.emailValidationStatus && (
+                  <div className="mb-3 p-2 rounded" style={{ background: selected.emailValidationStatus === 'deliverable' ? '#dcfce7' : '#fee2e2', fontSize: '0.8rem' }}>
+                    <strong>Email Status:</strong> {String(selected.emailValidationStatus).toUpperCase()}
+                    {selected.spamReason && <div className="text-danger mt-1">{String(selected.spamReason)}</div>}
+                  </div>
+                )}
                 <hr />
                 <div className="row g-2">
                   {Object.entries(selected).filter(([k]) => !["id","formType","submittedAt"].includes(k)).map(([k, v]) => (
