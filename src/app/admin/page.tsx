@@ -2,6 +2,28 @@
 import React, { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
 import { collection, getDocs, query, orderBy, doc, updateDoc, Timestamp } from "firebase/firestore";
+import { initializeApp, getApps } from "firebase/app";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, User } from "firebase/auth";
+
+// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyDMj45IV8LXuOArD2DgtwvfB841dzcn620",
+  authDomain: "tn-futecx.firebaseapp.com",
+  projectId: "tn-futecx",
+  storageBucket: "tn-futecx.firebasestorage.app",
+  messagingSenderId: "884450104101",
+  appId: "1:884450104101:web:eae68a54cdee6078f300cc",
+};
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Only these Google accounts are allowed into admin
+const ALLOWED_EMAILS = [
+  "tnfutecx@gmail.com",
+  "younginnovator2024@gmail.com",
+  "ashwinramakrishnan@gmail.com",
+  "meeravathisivakumar@gmail.com",
+];
 
 type FormEntry = {
   id: string;
@@ -21,17 +43,16 @@ const COLLECTIONS = [
   { key: "agentos_applications", label: "AgentOS Applications", color: "#059669", icon: "fa-robot" },
 ];
 
-const ADMIN_PASSWORD = "futecx@admin2026";
-
 function formatDate(ts: Timestamp | null) {
   if (!ts) return "—";
   try { return ts.toDate().toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" }); } catch { return "—"; }
 }
 
 export default function AdminPage() {
-  const [authenticated, setAuthenticated] = useState(false);
-  const [pw, setPw] = useState("");
-  const [pwError, setPwError] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [accessDenied, setAccessDenied] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
 
   const [activeTab, setActiveTab] = useState("contact_inquiries");
   const [data, setData] = useState<Record<string, FormEntry[]>>({});
@@ -40,10 +61,36 @@ export default function AdminPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
 
-  const handleLogin = () => {
-    if (pw === ADMIN_PASSWORD) { setAuthenticated(true); setPwError(false); }
-    else { setPwError(true); }
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (u) => {
+      if (u) {
+        if (ALLOWED_EMAILS.includes(u.email || "")) {
+          setUser(u);
+          setAccessDenied(false);
+        } else {
+          setAccessDenied(true);
+          setUser(null);
+          signOut(auth);
+        }
+      } else {
+        setUser(null);
+      }
+      setAuthLoading(false);
+    });
+    return () => unsub();
+  }, []);
+
+  const handleLogin = async () => {
+    setLoginLoading(true);
+    try {
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
+      await signInWithPopup(auth, provider);
+    } catch { /* cancelled */ }
+    setLoginLoading(false);
   };
+
+  const handleLogout = () => signOut(auth);
 
   const fetchAll = async () => {
     setLoading(true);
@@ -59,7 +106,7 @@ export default function AdminPage() {
     setLoading(false);
   };
 
-  useEffect(() => { if (authenticated) fetchAll(); }, [authenticated]);
+  useEffect(() => { if (user) fetchAll(); }, [user]);
 
   const updateStatus = async (colKey: string, docId: string, newStatus: string) => {
     await updateDoc(doc(db, colKey, docId), { status: newStatus });
@@ -82,27 +129,54 @@ export default function AdminPage() {
     return `badge bg-${map[status] || "secondary"}`;
   };
 
-  if (!authenticated) {
+  // Auth loading
+  if (authLoading) {
     return (
       <div className="d-flex align-items-center justify-content-center min-vh-100" style={{ background: "#0b1220" }}>
-        <div className="bg-white rounded-4 shadow-lg p-5" style={{ width: "380px" }}>
-          <div className="text-center mb-4">
-            <div style={{ fontSize: "2.5rem" }}>🔒</div>
-            <h4 className="fw-black mt-2">FUTECX Admin</h4>
-            <p className="text-muted small">Enter admin password to continue</p>
+        <div className="text-center text-white">
+          <div className="spinner-border text-info mb-3" role="status"></div>
+          <p className="text-muted small">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Access Denied
+  if (accessDenied) {
+    return (
+      <div className="d-flex align-items-center justify-content-center min-vh-100" style={{ background: "#0b1220" }}>
+        <div className="bg-white rounded-4 shadow-lg p-5 text-center" style={{ maxWidth: "400px" }}>
+          <div style={{ fontSize: "3rem" }}>🚫</div>
+          <h4 className="fw-black mt-3 text-danger">Access Denied</h4>
+          <p className="text-muted small">Your Google account is not authorized to access the FUTECX Admin Panel. Only registered FUTECX team members can log in.</p>
+          <button className="btn btn-outline-danger rounded-pill px-4 mt-2" onClick={() => { setAccessDenied(false); }}>Try Another Account</button>
+        </div>
+      </div>
+    );
+  }
+
+  // Login Screen
+  if (!user) {
+    return (
+      <div className="d-flex align-items-center justify-content-center min-vh-100" style={{ background: "linear-gradient(135deg, #0b1220 0%, #1e293b 100%)" }}>
+        <div className="bg-white rounded-4 shadow-lg p-5 text-center" style={{ width: "400px" }}>
+          <div style={{ fontSize: "2.5rem", fontWeight: "900", color: "#0ea5e9", marginBottom: "8px" }}>FUTECX</div>
+          <p className="text-muted small mb-4">Admin Panel · Team Access Only</p>
+          <div className="mb-4 p-3 rounded-3" style={{ background: "#f8fafc", border: "1px solid #e2e8f0" }}>
+            <p className="text-muted small mb-0">🔐 Secured with Google Authentication. Only authorized FUTECX team accounts can access this dashboard.</p>
           </div>
-          <input type="password" className={`form-control rounded-3 mb-3 ${pwError ? "is-invalid" : ""}`}
-            placeholder="Admin Password" value={pw} onChange={e => setPw(e.target.value)}
-            onKeyDown={e => e.key === "Enter" && handleLogin()} />
-          {pwError && <div className="invalid-feedback d-block mb-2">Incorrect password.</div>}
-          <button className="btn w-100 rounded-pill fw-bold" style={{ background: "linear-gradient(90deg, #0ea5e9, #6366f1)", color: "#fff" }} onClick={handleLogin}>
-            Login to Admin Panel
+          <button className="btn w-100 rounded-pill fw-bold d-flex align-items-center justify-content-center gap-2 py-3"
+            style={{ background: "#fff", border: "2px solid #e2e8f0", color: "#333" }}
+            onClick={handleLogin} disabled={loginLoading}>
+            <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#4285F4" d="M44.5 20H24v8.5h11.7C34.7 33.1 30.1 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.1 8 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 20-7.6 20-21 0-1.3-.1-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15 17.1 19.2 14 24 14c3.1 0 5.9 1.1 8 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3c-7.7 0-14.4 4.6-17.7 11.7z"/><path fill="#FBBC05" d="M24 45c5.5 0 10.5-1.8 14.4-4.9l-6.7-5.5C29.8 36.5 27 37.5 24 37.5c-6.1 0-11.3-4.1-13.1-9.7l-7 5.4C7.6 40.7 15.3 45 24 45z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.7c-.9 2.7-2.8 5-5.3 6.6l6.7 5.5C41.5 37.1 45 31 45 24c0-1.3-.1-2.7-.5-4z"/></svg>
+            {loginLoading ? "Signing in..." : "Sign in with Google"}
           </button>
         </div>
       </div>
     );
   }
 
+  // Authenticated Admin Dashboard
   return (
     <div style={{ minHeight: "100vh", background: "#f1f5f9" }}>
       {/* Header */}
@@ -112,10 +186,12 @@ export default function AdminPage() {
           <span style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.85rem", borderLeft: "1px solid rgba(255,255,255,0.2)", paddingLeft: "12px" }}>Admin Panel</span>
         </div>
         <div className="d-flex align-items-center gap-3">
+          {user.photoURL && <img src={user.photoURL} alt="" className="rounded-circle" width={32} height={32} />}
+          <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.85rem" }}>{user.email}</span>
           <button className="btn btn-sm rounded-pill" style={{ background: "rgba(255,255,255,0.1)", color: "#fff", border: "1px solid rgba(255,255,255,0.2)" }} onClick={fetchAll}>
             <i className="fas fa-sync-alt me-1"></i> Refresh
           </button>
-          <button className="btn btn-sm rounded-pill btn-danger" onClick={() => setAuthenticated(false)}>Logout</button>
+          <button className="btn btn-sm rounded-pill btn-danger" onClick={handleLogout}>Logout</button>
         </div>
       </div>
 
@@ -164,7 +240,6 @@ export default function AdminPage() {
           </select>
         </div>
 
-        {/* Table + Detail Panel */}
         <div className="row g-3">
           <div className={selected ? "col-lg-7" : "col-12"}>
             <div className="bg-white rounded-4 shadow-sm overflow-hidden">
@@ -212,7 +287,6 @@ export default function AdminPage() {
             </div>
           </div>
 
-          {/* Detail Panel */}
           {selected && (
             <div className="col-lg-5">
               <div className="bg-white rounded-4 shadow-sm p-4 position-sticky" style={{ top: "80px" }}>
@@ -229,7 +303,7 @@ export default function AdminPage() {
                 </div>
                 <hr />
                 <div className="row g-2">
-                  {Object.entries(selected).filter(([k]) => !["id","formType","submittedAt","__typename"].includes(k)).map(([k, v]) => (
+                  {Object.entries(selected).filter(([k]) => !["id","formType","submittedAt"].includes(k)).map(([k, v]) => (
                     <div key={k} className="col-12">
                       <div className="small text-muted text-uppercase fw-semibold" style={{ letterSpacing: "1px", fontSize: "0.65rem" }}>{k.replace(/([A-Z])/g, " $1")}</div>
                       <div className="small text-dark" style={{ wordBreak: "break-word" }}>{String(v || "—")}</div>

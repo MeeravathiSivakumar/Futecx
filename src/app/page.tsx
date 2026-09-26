@@ -248,17 +248,22 @@ export default function Home() {
               <div className="p-5 rounded-5 shadow-lg position-relative overflow-hidden" style={{ background: "linear-gradient(145deg, #ffffff, #f8f9fa)", border: "1px solid rgba(0,0,0,0.05)" }}>
                 <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "url('https://www.transparenttextures.com/patterns/clean-gray-paper.png')", opacity: 0.4 }}></div>
                 <div className="position-relative z-index-2">
-                  <span className="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2 mb-3 fw-bold shadow-sm" style={{ letterSpacing: "1px" }}>Hiring Now</span>
-                  <h2 className="display-5 fw-black text-dark mb-3">Join the New Core Team</h2>
-                  <p className="lead text-muted mx-auto mb-4" style={{ maxWidth: "700px" }}>
-                    We're actively recruiting talented leaders across AI/ML, Full-Stack Development, DevOps, UI/UX Design, and Community Management. Shape the future with us.
+                  <span className="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2 mb-3 fw-bold shadow-sm" style={{ letterSpacing: "1px" }}>Now Recruiting</span>
+                  <h2 className="display-5 fw-black text-dark mb-3">Join the FUTECX Team</h2>
+                  <p className="lead text-muted mx-auto mb-5" style={{ maxWidth: "700px" }}>
+                    We are actively building a world-class team of engineers, designers, AI researchers, and leaders. Pick your path below.
                   </p>
-                  <a id="applyBtn" href="#" className="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold shadow hover-lift transition-all">
-                    <i className="fas fa-paper-plane me-2"></i>Apply via Interest Form
-                  </a>
-                  <p className="text-muted small mt-4 mb-0">
-                    <i className="fas fa-info-circle me-1"></i> Replace the button link with your actual Google Form URL.
-                  </p>
+                  <div className="d-flex flex-wrap gap-3 justify-content-center">
+                    <Link href="/apply/core-team" className="btn btn-lg rounded-pill px-4 py-2 fw-bold shadow-sm" style={{ background: "linear-gradient(90deg, #7c3aed, #4f46e5)", color: "#fff", border: "none" }}>
+                      <i className="fas fa-users-gear me-2"></i> Join Core Team
+                    </Link>
+                    <Link href="/apply/intern" className="btn btn-lg rounded-pill px-4 py-2 fw-bold shadow-sm" style={{ background: "linear-gradient(90deg, #f59e0b, #ef4444)", color: "#fff", border: "none" }}>
+                      <i className="fas fa-graduation-cap me-2"></i> Apply as Intern
+                    </Link>
+                    <Link href="/apply/agentos" className="btn btn-lg rounded-pill px-4 py-2 fw-bold shadow-sm" style={{ background: "linear-gradient(90deg, #059669, #0ea5e9)", color: "#fff", border: "none" }}>
+                      <i className="fas fa-robot me-2"></i> Build AgentOS
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
