@@ -142,13 +142,18 @@ export default function AIResearchPage() {
   return (
     <>
       <div className="bg-dark text-white py-5 position-relative overflow-hidden" style={{
-        background: "url('/image/headers/ai-research-bg.png') no-repeat center center/cover",
+        background: "url('/image/company/research-bg.jpg') center/cover no-repeat",
         paddingTop: "100px", paddingBottom: "100px"
       }}>
-        <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "rgba(11, 18, 32, 0.85)" }}></div>
+        {/* CSS Grid Pattern Overlay */}
+        <div className="position-absolute w-100 h-100 top-0 start-0 opacity-25" style={{ backgroundImage: 'linear-gradient(rgba(14,165,233,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(14,165,233,0.2) 1px, transparent 1px)', backgroundSize: '50px 50px' }}></div>
+        <div className="position-absolute rounded-circle bg-info opacity-25" style={{ width: '40vw', height: '40vw', filter: 'blur(100px)', top: '-20%', left: '-10%' }}></div>
+        <div className="position-absolute rounded-circle bg-primary opacity-25" style={{ width: '30vw', height: '30vw', filter: 'blur(100px)', bottom: '-10%', right: '-10%' }}></div>
+        
+        <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "rgba(11, 18, 32, 0.55)", backdropFilter: "blur(4px)" }}></div>
         <div className="container position-relative z-index-2 py-5 text-center">
           <span className="badge bg-primary bg-opacity-25 text-info border border-info border-opacity-50 rounded-pill px-4 py-2 mb-3 shadow" data-aos="fade-down"><i className="fa-solid fa-microchip me-2"></i> FUTECX Research</span>
-          <h1 className="display-3 fw-light text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>AI & <span className="text-info fw-bolder">Research Lab</span></h1>
+          <h1 className="display-3 fw-bold text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>AI & <span className="text-info fw-bolder">Research Lab</span></h1>
           <p className="lead text-light opacity-75 mx-auto" style={{ maxWidth: "800px" }} data-aos="fade-up" data-aos-delay="200">
             Pushing the boundaries of what is possible. FUTECX Research focuses on natural language processing, computer vision, and the next generation of generative AI tools.
           </p>
@@ -370,3 +375,6 @@ export default function AIResearchPage() {
     </>
   );
 }
+
+
+

@@ -19,7 +19,7 @@
   justify-content: center;
   color: #fff;
   overflow: hidden;
-  background: url("/image/headers/contact-bg.jpg") center/cover no-repeat;
+  background: url("/image/company/contact-hero-bg.jpg") center/cover no-repeat;
 }
 
 .contact-hero::before {
@@ -207,3 +207,4 @@ select.glass-input option {
   from { transform: translateY(-20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+

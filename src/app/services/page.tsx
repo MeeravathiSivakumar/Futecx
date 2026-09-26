@@ -139,7 +139,7 @@ export default function ServicesPage() {
         <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "rgba(11, 18, 32, 0.75)" }}></div>
         <div className="container text-center position-relative z-index-2 py-5 mt-4">
           <span className="badge bg-primary bg-opacity-25 text-info border border-info border-opacity-50 rounded-pill px-4 py-2 mb-3 shadow" data-aos="fade-down">Our Service Based Work</span>
-          <h1 className="display-3 fw-light text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>Enterprise Engineering & <span className="text-info fw-bolder">Digital Innovation</span></h1>
+          <h1 className="display-3 fw-bold text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>Enterprise Engineering & <span className="text-info fw-bolder">Digital Innovation</span></h1>
           <p className="lead text-light opacity-75 mx-auto" style={{ maxWidth: "800px" }} data-aos="fade-up" data-aos-delay="200">
             We partner with startups, businesses, and enterprises to build highly scalable digital products. Explore exactly how our specific engineering services can transform your business.
           </p>
@@ -157,42 +157,57 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="row g-4">
-            {SERVICES.map((service, idx) => (
+                    <div className="row g-4">
+            {SERVICES.map((service, idx) => {
+              const gradients = [
+                'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+                'linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%)',
+                'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)',
+                'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
+              ];
+              const bgGradient = gradients[idx % gradients.length];
+              
+              return (
               <div className="col-xl-4 col-md-6" key={service.id} data-aos="fade-up" data-aos-delay={(idx % 3) * 100}>
-                <div className="card h-100 border-0 shadow-sm rounded-4 overflow-hidden bg-light hover-shadow transition-all">
-                  <div className="position-relative">
-                    <img src={service.img} className="card-img-top" alt={service.title} style={{ height: "200px", objectFit: "cover" }} />
+                <div className="card h-100 border-0 shadow-sm rounded-4 overflow-hidden bg-white hover-shadow transition-all" style={{ border: '1px solid rgba(0,0,0,0.05)' }}>
+                  {/* Abstract Icon Header instead of Image */}
+                  <div className="position-relative d-flex align-items-center justify-content-center" style={{ height: '180px', background: bgGradient, overflow: 'hidden' }}>
+                    {/* Background abstract circles */}
+                    <div className="position-absolute rounded-circle bg-white opacity-10" style={{ width: '150px', height: '150px', top: '-20%', right: '-10%' }}></div>
+                    <div className="position-absolute rounded-circle bg-white opacity-10" style={{ width: '100px', height: '100px', bottom: '-10%', left: '-5%' }}></div>
+                    
+                    {/* Main Icon */}
+                    <div className="rounded-circle bg-white d-flex align-items-center justify-content-center shadow-lg position-relative z-1" style={{ width: '80px', height: '80px' }}>
+                      <i className={`${service.icon} fs-1`} style={{ background: bgGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}></i>
+                    </div>
+
+                    {/* ID Badge */}
                     <div className="position-absolute top-0 end-0 m-3">
-                      <span className="badge bg-dark bg-opacity-75 text-white fs-6 rounded-circle d-flex align-items-center justify-content-center" style={{ width: "40px", height: "40px" }}>
+                      <span className="badge bg-white bg-opacity-25 text-white fs-6 rounded-pill px-3 shadow-sm" style={{ backdropFilter: 'blur(5px)' }}>
                         {service.id}
                       </span>
                     </div>
-                    <div className="position-absolute bottom-0 start-0 m-3">
-                      <div className="bg-white text-primary rounded-circle shadow-sm d-flex align-items-center justify-content-center" style={{ width: "45px", height: "45px" }}>
-                        <i className={`${service.icon} fs-5`}></i>
-                      </div>
-                    </div>
                   </div>
-                  <div className="card-body p-4 d-flex flex-column">
-                    <h4 className="fw-bold mb-3">{service.title}</h4>
-                    <p className="text-muted mb-4 flex-grow-1" style={{ fontSize: "0.95rem" }}>{service.desc}</p>
-                    
-                    <ul className="service-features list-unstyled mb-0 pt-3 border-top border-dark border-opacity-10">
+
+                  <div className="card-body p-4">
+                    <h4 className="fw-bolder mb-3 text-dark">{service.title}</h4>
+                    <p className="text-muted small mb-4 lh-base" style={{ minHeight: "80px" }}>{service.desc}</p>
+                    <hr className="text-secondary opacity-25 my-3" />
+                    <ul className="list-unstyled mb-0 d-flex flex-wrap gap-2">
                       {service.items.map((item, i) => (
-                        <li key={i} className="mb-2 d-flex align-items-center">
-                          <i className="fa-solid fa-check text-primary me-2 small"></i>
-                          <span className="small text-dark fw-medium">{item}</span>
+                        <li key={i} className="badge bg-light text-secondary border border-secondary border-opacity-25 rounded-pill py-2 px-3">
+                          {item}
                         </li>
                       ))}
                     </ul>
                   </div>
                 </div>
               </div>
-            ))}
+            )})}
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
       
       {/* COMMISSIONED WORK / CLIENT PROJECTS */}
       <section className="py-5 bg-light border-top">
@@ -293,15 +308,18 @@ export default function ServicesPage() {
       </section>
       
       {/* CALL TO ACTION */}
-      <section className="py-5 bg-dark text-white text-center position-relative overflow-hidden">
-        <div className="container position-relative z-index-2 py-5">
-          <h2 className="display-6 fw-bold mb-3">Ready to Build With Us?</h2>
-          <p className="lead mb-4 opacity-75">From an early-stage idea to a working MVP, we combine product thinking with software engineering.</p>
-          <Link href="/contact" className="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg">
-            Start Your Project <i className="fa-solid fa-arrow-right ms-2"></i>
-          </Link>
+      <section className="py-5 bg-white text-center">
+        <div className="container py-4">
+          <div className="bg-dark text-white rounded-5 py-5 px-4 shadow-lg position-relative overflow-hidden">
+            <h2 className="display-6 fw-bold mb-3 text-white">Ready to Build With Us?</h2>
+            <p className="lead mb-4 opacity-75">From an early-stage idea to a working MVP, we combine product thinking with software engineering.</p>
+            <Link href="/contact" className="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg">
+              Start Your Project <i className="fa-solid fa-arrow-right ms-2"></i>
+            </Link>
+          </div>
         </div>
       </section>
     </>
   );
 }
+

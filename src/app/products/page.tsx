@@ -73,7 +73,7 @@ export default function ProductsPage() {
         <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "rgba(11, 18, 32, 0.85)" }}></div>
         <div className="container text-center position-relative z-index-2 py-5 mt-4">
           <span className="badge bg-primary bg-opacity-25 text-info border border-info border-opacity-50 rounded-pill px-4 py-2 mb-3 shadow" data-aos="fade-down">Our Intellectual Property</span>
-          <h1 className="display-3 fw-light text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>Products Built by <span className="text-info fw-bolder">FUTECX</span></h1>
+          <h1 className="display-3 fw-bold text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>Products Built by <span className="text-info fw-bolder">FUTECX</span></h1>
           <p className="lead text-light opacity-75 mx-auto" style={{ maxWidth: "800px" }} data-aos="fade-up" data-aos-delay="200">
             Discover the flagship products and internal platforms engineered by FUTECX. From advanced conversational AI to enterprise platforms, we build digital infrastructure that scales.
           </p>

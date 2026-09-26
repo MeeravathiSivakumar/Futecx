@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Montserrat } from "next/font/google";
+import { Outfit, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import Navbar from "@/components/Navbar";
@@ -9,16 +9,17 @@ import AOSInit from "@/components/AOSInit";
 import LoginPopup from "@/components/LoginPopup";
 import BootstrapInit from "@/components/BootstrapInit";
 
-const poppins = Poppins({
-  weight: ["300", "400", "500", "600", "700", "800"],
+const dmsans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-inter", /* Keeping variable name same so globals.css doesn't break */
+  display: "swap"
 });
 
-const montserrat = Montserrat({
-  weight: ["500", "700", "800", "900"],
+const outfit = Outfit({
+  weight: ["500", "600", "700", "800", "900"],
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  variable: "--font-jakarta", /* Keeping variable name same so globals.css doesn't break */
+  display: "swap"
 });
 
 export const metadata: Metadata = {
@@ -39,7 +40,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
       </head>
-      <body className={`${poppins.variable} ${montserrat.variable}`}>
+      <body className={`${dmsans.variable} ${outfit.variable}`}>
         <AuthProvider>
           <BootstrapInit />
           <AOSInit />
@@ -52,3 +53,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+

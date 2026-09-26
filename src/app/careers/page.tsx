@@ -28,16 +28,18 @@ export default function CareersPage() {
 
       <div className="position-relative z-1">
         {/* HERO SECTION */}
-        <section className="py-5 position-relative border-bottom border-secondary border-opacity-25" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', background: 'url("/image/careers/hero-bg-ai.jpg") center/cover no-repeat' }}>
-          <div className="position-absolute w-100 h-100 top-0 start-0" style={{ background: "rgba(2, 6, 23, 0.75)" }}></div>
+        <section className="py-5 position-relative border-bottom border-secondary border-opacity-25 overflow-hidden" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', background: "url('/image/company/careers-hero-bg.jpg') center/cover no-repeat" }}>
+          {/* CSS Grid Pattern Overlay */}
+          <div className="position-absolute w-100 h-100 top-0 start-0 opacity-25" style={{ backgroundImage: 'radial-gradient(#38bdf8 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+          <div className="position-absolute w-100 h-100 top-0 start-0" style={{ background: "linear-gradient(180deg, rgba(2,6,23,0.5) 0%, rgba(2,6,23,1) 100%)" }}></div>
           <div className="container py-5 mt-5 text-center position-relative z-1">
-            <span className="badge rounded-pill mb-4 px-4 py-2" data-aos="fade-down" style={{ background: "rgba(14, 165, 233, 0.2)", border: "1px solid rgba(14, 165, 233, 0.5)", color: "#38bdf8", letterSpacing: "1px", backdropFilter: "blur(5px)" }}>
+            <span className="badge rounded-pill mb-4 px-4 py-2 shadow-sm" data-aos="fade-down" style={{ background: "rgba(14, 165, 233, 0.15)", border: "1px solid rgba(14, 165, 233, 0.4)", color: "#38bdf8", letterSpacing: "1px", backdropFilter: "blur(5px)" }}>
               <i className="fas fa-rocket me-2"></i> Join the Vision
             </span>
-            <h1 className="display-3 fw-black mb-4" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
+            <h1 className="display-3 fw-black mb-4 text-white" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
               Build the <span className="text-info">Future</span> at FUTECX
             </h1>
-            <p className="lead text-light opacity-85 mx-auto fs-4 fw-medium" style={{ maxWidth: "800px", textShadow: "0 2px 10px rgba(0,0,0,0.8)" }} data-aos="fade-up" data-aos-delay="200">
+            <p className="lead text-light opacity-85 mx-auto fs-4 fw-medium" style={{ maxWidth: "800px" }} data-aos="fade-up" data-aos-delay="200">
               Join a passionate team of engineers and innovators in Thanjavur, pushing the boundaries of AI, Web3, and digital platforms.
             </p>
           </div>
@@ -87,9 +89,33 @@ export default function CareersPage() {
                   </Link>
                 </div>
                 <div className="col-lg-6 text-center" data-aos="fade-left">
-                  <div className="position-relative d-inline-block w-100 mt-4 mt-lg-0">
-                    <div className="position-absolute top-50 start-50 translate-middle rounded-circle bg-info opacity-25" style={{ width: "300px", height: "300px", filter: "blur(60px)", zIndex: 0 }}></div>
-                    <img src="/image/careers/internship.jpg" alt="FUTECX Interns" className="img-fluid rounded-4 shadow-lg position-relative z-1 border border-white border-4" style={{ objectFit: "cover", height: "350px", width: "100%" }} />
+                  <div className="position-relative w-100 mt-4 mt-lg-0" style={{ height: "350px" }}>
+                    {/* Decorative blobs */}
+                    <div className="position-absolute top-50 start-50 translate-middle rounded-circle bg-info opacity-25" style={{ width: "250px", height: "250px", filter: "blur(40px)", zIndex: 0 }}></div>
+                    
+                    {/* Genuine UI Design representation */}
+                    <div className="position-absolute z-1 shadow rounded-4 bg-white border border-light p-4" style={{ top: "10%", left: "5%", width: "70%", transform: "rotate(-3deg)" }}>
+                       <div className="d-flex align-items-center mb-3">
+                          <div className="bg-info bg-opacity-10 p-2 rounded-3 me-3"><i className="fas fa-code text-info fs-4"></i></div>
+                          <div className="fw-bold text-dark text-start">Frontend Engineering</div>
+                       </div>
+                       <div className="progress" style={{ height: "6px" }}><div className="progress-bar bg-info w-75"></div></div>
+                    </div>
+
+                    <div className="position-absolute z-2 shadow rounded-4 bg-white border border-light p-4" style={{ bottom: "10%", right: "5%", width: "75%", transform: "rotate(2deg)" }}>
+                       <div className="d-flex align-items-center mb-3">
+                          <div className="bg-primary bg-opacity-10 p-2 rounded-3 me-3"><i className="fas fa-brain text-primary fs-4"></i></div>
+                          <div className="fw-bold text-dark text-start">AI Model Training</div>
+                       </div>
+                       <div className="d-flex gap-2">
+                         <span className="badge bg-light text-dark border">PyTorch</span>
+                         <span className="badge bg-light text-dark border">TensorFlow</span>
+                       </div>
+                    </div>
+
+                    <div className="position-absolute z-3 rounded-circle bg-white shadow-lg d-flex align-items-center justify-content-center" style={{ top: "40%", left: "40%", width: "80px", height: "80px", border: "4px solid #f0f9ff" }}>
+                       <i className="fas fa-rocket text-info fs-3"></i>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -137,7 +163,7 @@ export default function CareersPage() {
         {/* CTA SECTION */}
         <section className="py-5 position-relative border-top border-info border-opacity-25" style={{ background: "rgba(14, 165, 233, 0.02)" }}>
           <div className="container py-5 text-center" data-aos="zoom-in">
-            <h2 className="fw-bolder fs-1 mb-4">Don't see a perfect fit?</h2>
+            <h2 className="fw-bolder fs-1 mb-4 text-white">Don't see a perfect fit?</h2>
             <p className="opacity-75 mb-5 mx-auto fs-5" style={{ maxWidth: '600px' }}>
               We are always on the lookout for exceptional talent. If you think you belong at FUTECX, drop us your resume anyway!
             </p>
@@ -192,3 +218,6 @@ export default function CareersPage() {
     </div>
   );
 }
+
+
+

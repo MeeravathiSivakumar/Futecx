@@ -58,12 +58,31 @@ export default function Footer() {
             <div className="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
               <h4 className="text-white mb-4 fw-bold">Gallery</h4>
               <div className="row g-2">
-                <div className="col-4 overflow-hidden rounded"><img className="img-fluid footer-gallery-img transition-all" src="/image/gallery/gallery-1.jpg" alt="Gallery 1" /></div>
-                <div className="col-4 overflow-hidden rounded"><img className="img-fluid footer-gallery-img transition-all" src="/image/gallery/gallery-2.jpg" alt="Gallery 2" /></div>
-                <div className="col-4 overflow-hidden rounded"><img className="img-fluid footer-gallery-img transition-all" src="/image/gallery/gallery-3.jpg" alt="Gallery 3" /></div>
-                <div className="col-4 overflow-hidden rounded"><img className="img-fluid footer-gallery-img transition-all" src="/image/gallery/gallery-4.jpg" alt="Gallery 4" /></div>
-                <div className="col-4 overflow-hidden rounded"><img className="img-fluid footer-gallery-img transition-all" src="/image/gallery/gallery-5.jpg" alt="Gallery 5" /></div>
-                <div className="col-4 overflow-hidden rounded"><img className="img-fluid footer-gallery-img transition-all" src="/image/gallery/gallery-6.jpg" alt="Gallery 6" /></div>
+                {[
+                  { num: 1, col: 'col-6', ratio: '16/9' }, 
+                  { num: 2, col: 'col-6', ratio: '16/9' }, 
+                  { num: 3, col: 'col-12', ratio: '24/7' }, 
+                  { num: 4, col: 'col-4', ratio: '1/1' }, 
+                  { num: 5, col: 'col-4', ratio: '1/1' }, 
+                  { num: 6, col: 'col-4', ratio: '1/1' }
+                ].map((item) => (
+                  <div key={item.num} className={item.col}>
+                    <div className="footer-gallery-wrapper rounded-3 overflow-hidden shadow-sm" style={{ aspectRatio: item.ratio }}>
+                      <img 
+                        className="img-fluid transition-all footer-gallery-img" 
+                        src={`/image/gallery/gallery-${item.num}.jpg`} 
+                        alt={`Gallery ${item.num}`} 
+                        style={{ 
+                          width: '100%', 
+                          height: '100%', 
+                          objectFit: 'cover', 
+                          objectPosition: item.num === 1 ? 'center' : 'top center',
+                          opacity: 0.8
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -138,17 +157,10 @@ export default function Footer() {
           transform: translateY(-3px);
           box-shadow: 0 5px 15px rgba(13, 110, 253, 0.4);
         }
-        .footer-gallery-img {
-          width: 100%;
-          height: 80px;
-          object-fit: cover;
-          opacity: 0.7;
-          cursor: pointer;
-        }
-        .footer-gallery-img:hover {
-          opacity: 1;
-          transform: scale(1.1);
-        }
+        .footer-gallery-wrapper { width: 100%; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.05); cursor: pointer; transition: all 0.3s ease; }
+          .footer-gallery-wrapper:hover { box-shadow: 0 0 20px rgba(255,255,255,0.3) !important; transform: translateY(-3px); z-index: 10; position: relative; }
+        .footer-gallery-img { transition: all 0.5s ease; }
+        .footer-gallery-wrapper:hover .footer-gallery-img { opacity: 1 !important; transform: scale(1.15); }
         .backdrop-blur {
           backdrop-filter: blur(10px);
         }
@@ -180,3 +192,15 @@ export default function Footer() {
     </>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+

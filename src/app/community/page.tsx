@@ -24,7 +24,7 @@ export default function CommunityPage() {
         <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "rgba(11, 18, 32, 0.85)" }}></div>
         <div className="container position-relative z-index-2 py-5 text-center" style={{ paddingTop: '100px', paddingBottom: '50px' }}>
           <span className="badge bg-primary bg-opacity-25 text-info border border-info border-opacity-50 rounded-pill px-4 py-2 mb-3 shadow mt-5" data-aos="fade-down">The FUTECX Ecosystem</span>
-          <h1 className="display-3 fw-light text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>Connect With <span className="text-info fw-bolder">Us</span></h1>
+          <h1 className="display-3 fw-bold text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>Connect With <span className="text-info fw-bolder">Us</span></h1>
           <p className="lead text-light opacity-75 mx-auto" style={{ maxWidth: "800px" }} data-aos="fade-up" data-aos-delay="200">
             Join thousands of builders, researchers, and innovators across our global networks. Collaborate, learn, and shape the future of digital business.
           </p>

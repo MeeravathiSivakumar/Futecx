@@ -79,7 +79,7 @@ export default function Team() {
       <header className="hero">
         <div className="container position-relative" data-aos="fade-up" data-aos-duration="900">
           <span className="badge bg-primary bg-opacity-25 text-info border border-info border-opacity-50 rounded-pill px-4 py-2 mb-3 shadow" data-aos="fade-down"><i className="fa-solid fa-users me-2"></i> Innovators • Builders • Leaders</span>
-          <h1 className="display-3 fw-light text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>Meet the <span className="text-info fw-bolder">TN-FUTECX</span> Team</h1>
+          <h1 className="display-3 fw-bold text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>Meet the <span className="text-info fw-bolder">TN-FUTECX</span> Team</h1>
           <p className="lead text-light opacity-75 mx-auto" style={{ maxWidth: "800px" }} data-aos="fade-up" data-aos-delay="200">The passionate young innovators turning ideas into real-world impact.</p>
         </div>
       </header>

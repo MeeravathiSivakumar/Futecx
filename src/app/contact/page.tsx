@@ -60,7 +60,7 @@ export default function Contact() {
       <section className="contact-hero">
         <div className="container contact-hero-content text-center" style={{ paddingTop: '80px' }}>
           <span className="badge bg-primary bg-opacity-25 text-info border border-info border-opacity-50 rounded-pill px-4 py-2 mb-3 shadow" data-aos="fade-down">Let's Connect</span>
-          <h1 className="display-3 fw-light text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>Partner with <span className="text-info fw-bolder">FUTECX</span></h1>
+          <h1 className="display-3 fw-bold text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>Partner with <span className="text-info fw-bolder">FUTECX</span></h1>
           <p className="lead text-light opacity-75 mx-auto" style={{ maxWidth: "800px" }} data-aos="fade-up" data-aos-delay="200">
             Whether you need an AI agent, a full-scale web platform, or creative digital design, our team is ready to build the future with you.
           </p>

@@ -33,7 +33,7 @@ const SLIDES: SlideType[] = [
     image: "/image/home/slide-2-anniversary-new.jpg",
     badgeIcon: "fas fa-calendar-check",
     badgeText: "Event",
-    title: <>3rd <span className="text-info">FUTECX</span> Anniversary</>,
+    title: <>3rd <span className="text-info">FUTECX</span><br />Anniversary</>,
     type: "27 Sep 2026 - 2027 • Thanjavur",
     desc: "Join us for the biggest tech meetup of the year.",
     button1: { text: "Get Updates", href: "#newsletter", icon: "fas fa-envelope-open-text", className: "btn-primary rounded-pill py-3 px-4 shadow" },
@@ -107,7 +107,7 @@ export default function HeroSlider() {
                     <i className={`${slide.badgeIcon} me-2`}></i>{slide.badgeText}
                   </span>
                 )}
-                <div className="title" style={{ fontSize: "clamp(34px, 4.5vw, 56px)", lineHeight: "1.1", wordBreak: "break-word" }}>{slide.title}</div>
+                <h1 className="title display-2 fw-black"  style={{ fontSize: "clamp(34px, 4.5vw, 56px)", lineHeight: "1.1", wordBreak: "break-word" }}>{slide.title}</h1>
                 <div className="type" style={{ fontSize: "1.1rem", marginTop: "10px" }}>{slide.type}</div>
                 <div className="description" style={{ fontSize: "1.1rem", marginTop: "10px", marginBottom: "25px", opacity: 0.85 }}>{slide.desc}</div>
                 <div className="hero-buttons mt-4">
@@ -166,3 +166,5 @@ export default function HeroSlider() {
     </header>
   );
 }
+
+

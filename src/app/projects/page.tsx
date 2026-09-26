@@ -67,6 +67,7 @@ export default function ProjectsPage() {
     {
       id: "insight",
       title: "Insight AI",
+      link: "https://insightai-frontend.onrender.com/",
       tags: ["Data Science", "LLM", "Analytics"],
       desc: "An AI-powered data analyst capable of parsing complex raw datasets, identifying hidden patterns, and autonomously generating comprehensive business intelligence reports.",
       image: "/image/projects/insight.jpg",
@@ -222,3 +223,5 @@ export default function ProjectsPage() {
     </>
   );
 }
+
+

@@ -71,25 +71,29 @@ export default function Home() {
       <HeroSlider />
 
       {/* ANNIVERSARY HIGHLIGHT - Cosmic Star Visuals */}
-      <section className="py-4 shadow-lg position-relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0f172a 0%, #083344 50%, #0f766e 100%)", borderTop: "1px solid rgba(6, 182, 212, 0.3)", borderBottom: "1px solid rgba(6, 182, 212, 0.3)", zIndex: 10 }} data-aos="zoom-in-up" data-aos-duration="1500" data-aos-delay="200">
-        <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "url('https://www.transparenttextures.com/patterns/stardust.png')", opacity: 0.9 }}></div>
-        <div className="position-absolute top-50 start-50 translate-middle w-100 h-100" style={{ background: "radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, rgba(0,0,0,0) 70%)", animation: "pulse 4s infinite alternate" }}></div>
-        <div className="container position-relative z-index-2">
-          <div className="d-flex flex-column flex-md-row align-items-center justify-content-between text-white">
-            <div className="d-flex align-items-center gap-4 mb-3 mb-md-0">
-              <div className="display-1 fw-bold anniversary-text" style={{ letterSpacing: "-2px" }}>
-                 3<span className="fs-1 align-top fw-bold" style={{ marginLeft: "2px" }}>rd</span>
+      <section className="py-5 bg-white position-relative" style={{ zIndex: 10 }}>
+        <div className="container">
+          <div className="rounded-5 py-4 px-4 px-md-5 shadow-lg position-relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0f172a 0%, #083344 50%, #0f766e 100%)", border: "1px solid rgba(6, 182, 212, 0.3)" }} data-aos="zoom-in-up" data-aos-duration="1500" data-aos-delay="200">
+            <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "url('https://www.transparenttextures.com/patterns/stardust.png')", opacity: 0.9 }}></div>
+            <div className="position-absolute top-50 start-50 translate-middle w-100 h-100" style={{ background: "radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, rgba(0,0,0,0) 70%)", animation: "pulse 4s infinite alternate" }}></div>
+            <div className="position-relative z-index-2">
+              <div className="d-flex flex-column flex-md-row align-items-center justify-content-between text-white">
+                <div className="d-flex align-items-center gap-4 mb-3 mb-md-0">
+                  <div className="display-1 fw-bold anniversary-text" style={{ letterSpacing: "-2px" }}>
+                     3<span className="fs-1 align-top fw-bold" style={{ marginLeft: "2px" }}>rd</span>
+                  </div>
+                  <div>
+                    <h4 className="fw-bolder mb-1 fs-2 text-uppercase" style={{ color: "#f8fafc", letterSpacing: "3px", textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>FUTECX Anniversary</h4>
+                    <p className="mb-2 fs-5 text-light opacity-85 fw-medium">Celebrating three years of relentless innovation and global growth.</p>
+                    <span className="badge rounded-pill text-white" style={{ background: "rgba(255, 255, 255, 0.15)", backdropFilter: "blur(5px)", border: "1px solid rgba(255, 255, 255, 0.3)", padding: "8px 16px", fontSize: "0.95rem", fontWeight: "600" }}>
+                      <i className="fas fa-calendar-alt me-2"></i> 27th Sep 2026 to 2027
+                    </span>
+                  </div>
+                </div>
+                <div data-aos="fade-left" data-aos-delay="600">
+                  <Link href="/about" className="btn btn-lg rounded-pill px-5 fw-bold text-dark shadow hover-lift" style={{ background: "linear-gradient(90deg, #06b6d4 0%, #14b8a6 100%)", border: "none" }}>Discover Our Journey</Link>
+                </div>
               </div>
-              <div>
-                <h4 className="fw-bolder mb-1 fs-2 text-uppercase" style={{ color: "#f8fafc", letterSpacing: "3px", textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>FUTECX Anniversary</h4>
-                <p className="mb-2 fs-5 text-light opacity-85 fw-medium">Celebrating three years of relentless innovation and global growth.</p>
-                <span className="badge rounded-pill text-white" style={{ background: "rgba(255, 255, 255, 0.15)", backdropFilter: "blur(5px)", border: "1px solid rgba(255, 255, 255, 0.3)", padding: "8px 16px", fontSize: "0.95rem", fontWeight: "600" }}>
-                  <i className="fas fa-calendar-alt me-2"></i> 27th Sep 2026 to 2027
-                </span>
-              </div>
-            </div>
-            <div data-aos="fade-left" data-aos-delay="600">
-              <Link href="/about" className="btn btn-lg rounded-pill px-5 fw-bold text-dark shadow hover-lift" style={{ background: "linear-gradient(90deg, #06b6d4 0%, #14b8a6 100%)", border: "none" }}>Discover Our Journey</Link>
             </div>
           </div>
         </div>

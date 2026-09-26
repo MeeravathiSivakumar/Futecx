@@ -17,12 +17,12 @@ export default function AboutPage() {
   return (
     <>
       {/* HERO SECTION */}
-      <section className="position-relative overflow-hidden text-white d-flex align-items-center" style={{ minHeight: "60vh", background: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat" }}>
+      <section className="position-relative overflow-hidden text-white d-flex align-items-center" style={{ minHeight: "60vh", background: "url('/image/company/about-hero-bg.jpg') center/cover no-repeat" }}>
         <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(13, 110, 253, 0.6) 100%)" }}></div>
         <div className="container position-relative z-index-2 py-5 text-center">
           <span className="badge bg-primary bg-opacity-25 text-info border border-info border-opacity-50 rounded-pill px-4 py-2 mb-3 shadow" data-aos="fade-down">Who We Are</span>
-          <h1 className="display-3 fw-light text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
-            Engineering the <span className="text-info fw-bolder">Future</span>
+          <h1 className="display-3 fw-bold text-white mb-3" data-aos="zoom-in" style={{ textShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
+            The Vision Behind <span className="text-info fw-bolder">FUTECX</span>
           </h1>
           <p className="lead text-light opacity-75 mx-auto" style={{ maxWidth: "800px" }} data-aos="fade-up" data-aos-delay="200">
             FUTECX builds intelligent digital products, custom software, and complex AI systems designed for a rapidly changing world.
@@ -217,13 +217,20 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-5 bg-dark text-white text-center">
+      <section className="py-5 text-center bg-white">
         <div className="container py-4">
-          <h3 className="fw-bold mb-3">Ready to Build With Us?</h3>
-          <p className="opacity-75 mb-4">Join FUTECX as a partner or client. Let's engineer the future.</p>
-          <Link href="/contact" className="btn btn-primary rounded-pill px-5 py-3 fw-bold shadow-lg">
-            Contact Us Today
-          </Link>
+          <div className="bg-dark text-white rounded-5 py-5 px-4 shadow-lg position-relative overflow-hidden" data-aos="zoom-in" data-aos-duration="1000">
+            <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "radial-gradient(circle at center, rgba(13,110,253,0.15) 0%, rgba(0,0,0,0) 70%)" }}></div>
+            <div className="position-relative z-index-2">
+              <h3 className="fw-bold mb-3 display-6 text-white">Ready to Build With Us?</h3>
+              <p className="opacity-75 mb-4 fs-5">Join FUTECX as a partner or client. Let's engineer the future.</p>
+              <div className="d-flex justify-content-center gap-3 mt-4">
+                <Link href="/contact" className="btn btn-primary rounded-pill px-5 py-3 fw-bold shadow hover-lift d-flex align-items-center">
+                  <i className="fas fa-paper-plane me-2"></i> Contact Us Today
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       
@@ -275,4 +282,9 @@ export default function AboutPage() {
     </>
   );
 }
+
+
+
+
+
 
