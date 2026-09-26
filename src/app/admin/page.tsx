@@ -99,7 +99,7 @@ export default function AdminPage() {
       try {
         const q = query(collection(db, col.key), orderBy("submittedAt", "desc"));
         const snap = await getDocs(q);
-        result[col.key] = snap.docs.map(d => ({ id: d.id, _collection: col.key, ...d.data() } as FormEntry));
+        result[col.key] = snap.docs.map(d => ({ id: d.id, _collection: col.key, ...d.data() } as unknown as FormEntry));
       } catch { result[col.key] = []; }
     }
     setData(result);
