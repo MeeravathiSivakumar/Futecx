@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { isSpam } from "@/lib/spamDetector";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
@@ -26,11 +27,11 @@ export default function AgentOSApplicationForm() {
         sampleWork: get("sampleWork"),
         motivation: get("motivation"),
         submittedAt: serverTimestamp(),
-        status: "pending",
+        status: isSpam({ name: get("name"), email: get("email"), phone: get("phone") }) ? "spam" : "pending",
       });
       setStatus("success");
       form.reset();
-    } catch {
+    } catch (error) { console.error(error);
       setStatus("error");
     }
   };

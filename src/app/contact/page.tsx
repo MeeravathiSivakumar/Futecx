@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import "./contact.css";
+import { isSpam } from "@/lib/spamDetector";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
@@ -35,7 +36,7 @@ export default function Contact() {
         service,
         message,
         submittedAt: serverTimestamp(),
-        status: "new",
+        status: isSpam({ name, email, phone, message }) ? "spam" : "new",
       });
       
       alert("🎉 Message sent successfully! Our team will get back to you shortly.");

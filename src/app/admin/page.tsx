@@ -99,7 +99,7 @@ export default function AdminPage() {
       try {
         const q = query(collection(db, col.key), orderBy("submittedAt", "desc"));
         const snap = await getDocs(q);
-        result[col.key] = snap.docs.map(d => ({ id: d.id, ...d.data() } as FormEntry));
+        result[col.key] = snap.docs.map(d => ({ id: d.id, _collection: col.key, ...d.data() } as FormEntry));
       } catch { result[col.key] = []; }
     }
     setData(result);
@@ -117,15 +117,20 @@ export default function AdminPage() {
     if (selected?.id === docId) setSelected(prev => prev ? { ...prev, status: newStatus } : null);
   };
 
-  const activeCol = COLLECTIONS.find(c => c.key === activeTab)!;
-  const entries = (data[activeTab] || []).filter(e => {
+  const activeCol = COLLECTIONS.find(c => c.key === activeTab) || { key: "spam", label: "Spam Vault", color: "#dc3545", icon: "fa-ban" };
+  
+  let baseEntries = activeTab === "spam" 
+    ? Object.values(data).flat().filter(e => e.status === "spam")
+    : (data[activeTab] || []).filter(e => e.status !== "spam");
+
+  const entries = baseEntries.filter(e => {
     const matchSearch = !search || e.name?.toLowerCase().includes(search.toLowerCase()) || e.email?.toLowerCase().includes(search.toLowerCase());
     const matchStatus = statusFilter === "all" || e.status === statusFilter;
     return matchSearch && matchStatus;
   });
 
   const statusBadge = (status: string) => {
-    const map: Record<string, string> = { new: "primary", pending: "warning", reviewed: "info", accepted: "success", rejected: "danger" };
+    const map: Record<string, string> = { new: "primary", pending: "warning", reviewed: "info", accepted: "success", rejected: "danger", spam: "dark" };
     return `badge bg-${map[status] || "secondary"}`;
   };
 
@@ -213,16 +218,26 @@ export default function AdminPage() {
 
         {/* Tabs */}
         <div className="d-flex gap-2 mb-3 flex-wrap">
-          {COLLECTIONS.map(col => (
-            <button key={col.key} onClick={() => { setActiveTab(col.key); setSelected(null); setSearch(""); setStatusFilter("all"); }}
-              className={`btn btn-sm rounded-pill fw-semibold ${activeTab === col.key ? "text-white" : "btn-light"}`}
-              style={activeTab === col.key ? { background: col.color, border: "none" } : {}}>
-              <i className={`fas ${col.icon} me-1`}></i> {col.label}
-              <span className="ms-2 badge rounded-pill bg-white" style={{ color: col.color }}>
-                {(data[col.key] || []).length}
-              </span>
-            </button>
-          ))}
+          {COLLECTIONS.map(col => {
+            const count = (data[col.key] || []).filter(e => e.status !== "spam").length;
+            return (
+              <button key={col.key} onClick={() => { setActiveTab(col.key); setSelected(null); setSearch(""); setStatusFilter("all"); }}
+                className={`btn btn-sm rounded-pill fw-semibold ${activeTab === col.key ? "text-white" : "btn-light"}`}
+                style={activeTab === col.key ? { background: col.color, border: "none" } : {}}>
+                <i className={`fas ${col.icon} me-1`}></i> {col.label}
+                <span className="ms-2 badge rounded-pill bg-white" style={{ color: col.color }}>{count}</span>
+              </button>
+            )
+          })}
+          
+          <button onClick={() => { setActiveTab("spam"); setSelected(null); setSearch(""); setStatusFilter("all"); }}
+            className={`btn btn-sm rounded-pill fw-bold ${activeTab === "spam" ? "text-white" : "btn-outline-danger"}`}
+            style={activeTab === "spam" ? { background: "#dc3545", border: "none" } : {}}>
+            <i className="fas fa-ban me-1"></i> Spam Vault
+            <span className={`ms-2 badge rounded-pill ${activeTab === "spam" ? "bg-white text-danger" : "bg-danger text-white"}`}>
+              {Object.values(data).flat().filter(e => e.status === "spam").length}
+            </span>
+          </button>
         </div>
 
         {/* Filters */}
@@ -237,6 +252,7 @@ export default function AdminPage() {
             <option value="reviewed">Reviewed</option>
             <option value="accepted">Accepted</option>
             <option value="rejected">Rejected</option>
+            <option value="spam">Spam</option>
           </select>
         </div>
 
@@ -270,12 +286,13 @@ export default function AdminPage() {
                             <select className="form-select form-select-sm rounded-pill" style={{ width: "120px", fontSize: "0.75rem" }}
                               value={e.status}
                               onClick={ev => ev.stopPropagation()}
-                              onChange={ev => updateStatus(activeTab, e.id, ev.target.value)}>
+                              onChange={ev => updateStatus((e as any)._collection || activeTab, e.id, ev.target.value)}>
                               <option value="new">New</option>
                               <option value="pending">Pending</option>
                               <option value="reviewed">Reviewed</option>
                               <option value="accepted">Accepted</option>
                               <option value="rejected">Rejected</option>
+                              <option value="spam">Spam</option>
                             </select>
                           </td>
                         </tr>
