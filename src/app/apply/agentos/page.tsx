@@ -11,24 +11,17 @@ export default function AgentOSApplicationForm() {
     const get = (name: string) => (form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement)?.value?.trim() ?? "";
 
     try {
-      await addDoc(collection(db, "agentos_applications"), {
-        formType: "AgentOS Project Application",
-        name: get("name"),
-        email: get("email"),
-        phone: get("phone"),
-        contributionArea: get("contributionArea"),
-        aiExperience: get("aiExperience"),
-        tools: get("tools"),
-        github: get("github"),
-        linkedin: get("linkedin"),
-        sampleWork: get("sampleWork"),
-        motivation: get("motivation"),
-        submittedAt: serverTimestamp(),
-        status: isSpam({ name: get("name"), email: get("email"), phone: get("phone") }) ? "spam" : "pending",
+      const res = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formType: 'agentos', name: get("name"), email: get("email"), phone: get("phone"), role: get("role"), vision: get("vision"), github: get("github") })
       });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error);
       setStatus("success");
       form.reset();
-    } catch (error) { console.error(error);
+    } catch (error) {
+      console.error(error);
       setStatus("error");
     }
   };

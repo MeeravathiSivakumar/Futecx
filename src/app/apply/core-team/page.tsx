@@ -11,25 +11,17 @@ export default function CoreTeamForm() {
     const get = (name: string) => (form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement)?.value?.trim() ?? "";
 
     try {
-      await addDoc(collection(db, "core_team_applications"), {
-        formType: "Core Team Application",
-        name: get("name"),
-        email: get("email"),
-        phone: get("phone"),
-        role: get("role"),
-        experience: get("experience"),
-        portfolio: get("portfolio"),
-        github: get("github"),
-        linkedin: get("linkedin"),
-        currentRole: get("currentRole"),
-        vision: get("vision"),
-        availability: get("availability"),
-        submittedAt: serverTimestamp(),
-        status: isSpam({ name: get("name"), email: get("email"), phone: get("phone") }) ? "spam" : "pending",
+      const res = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formType: 'core_team', name: get("name"), email: get("email"), phone: get("phone"), role: get("role"), experience: get("experience"), portfolio: get("portfolio"), github: get("github"), linkedin: get("linkedin"), currentRole: get("currentRole"), vision: get("vision"), availability: get("availability") })
       });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error);
       setStatus("success");
       form.reset();
-    } catch (error) { console.error(error);
+    } catch (error) {
+      console.error(error);
       setStatus("error");
     }
   };

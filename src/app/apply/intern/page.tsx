@@ -11,23 +11,17 @@ export default function InternApplicationForm() {
     const get = (name: string) => (form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement)?.value?.trim() ?? "";
 
     try {
-      await addDoc(collection(db, "intern_applications"), {
-        formType: "Intern Application",
-        name: get("name"),
-        email: get("email"),
-        phone: get("phone"),
-        college: get("college"),
-        year: get("year"),
-        domain: get("domain"),
-        skills: get("skills"),
-        linkedin: get("linkedin"),
-        whyFutecx: get("whyFutecx"),
-        submittedAt: serverTimestamp(),
-        status: isSpam({ name: get("name"), email: get("email"), phone: get("phone") }) ? "spam" : "pending",
+      const res = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formType: 'intern', name: get("name"), email: get("email"), phone: get("phone"), college: get("college"), year: get("year"), domain: get("domain"), skills: get("skills"), linkedin: get("linkedin"), whyFutecx: get("whyFutecx") })
       });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error);
       setStatus("success");
       form.reset();
-    } catch (error) { console.error(error);
+    } catch (error) {
+      console.error(error);
       setStatus("error");
     }
   };
